@@ -1,0 +1,51 @@
+.container {
+    color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 1rem;
+    height: 92.3vh;
+    box-sizing: border-box;
+    margin: 0 auto;
+    background-color: var(--warn-color);
+}
+
+.primary-button {
+    margin-top: 1rem;
+    width: 30%;
+    padding: 1rem 1rem;
+    border-radius: 0.6rem;
+    background-color: var(--primary-color);
+    color: var(--warn-color) !important;
+    font-size: 1rem;
+}
+
+.bit-panel {
+    width: 70%;
+    background-color: var(--accent-color);
+    margin-top: 2rem;
+}
+
+.header-center {
+    align-items: center;
+}
+
+.title-center {
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.bit-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.bit-image {
+    max-width: 80%;
+    height: 300px;
+    margin-top: 10px;
+}

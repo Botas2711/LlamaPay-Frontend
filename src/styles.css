@@ -1,0 +1,84 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:root {
+    --primary-color: #252525;
+    --accent-color: #7BAE7F;
+    --button-color: #95D7AE;
+
+    --warn-color: #F2F5EA;
+    --card-secondary: #EBF3FE;
+    --table-primary: #49BEFF;
+}
+
+[data-theme='light'] {
+    --primary-color: #252525; /* Color para el tema claro */
+    --accent-color: #7BAE7F;
+    --button-color: #95D7AE;
+    --warn-color: #F2F5EA;
+}
+
+[data-theme='dark'] {
+    --primary-color: #F2F5EA; /* Color para el tema oscuro */
+    --accent-color: #7BAE7F;
+    --button-color: #A8E0D0;
+    --warn-color: #252525;
+}
+
+/* Custom Input */
+.form-field {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.form-field label {
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.form-field input{
+    width: 100%;
+    color: var(--primary-color) !important;
+}
+
+.form-field input::content {
+    padding: 2rem;
+    color: var(--primary-color) !important;
+}
+
+.form-field input::placeholder {
+    color: var(--primary-color) !important;
+}
+
+.primary-button {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 1rem 1rem;
+    border-radius: 0.6rem;
+    background-color: var(--primary-color)!important;
+    color: var(--warn-color) !important;
+    font-size: 1rem;
+}
+
+.secondary-button{
+    margin-top: 1rem;
+    width: 100%;
+    padding: 1rem 1rem;
+    border-radius: 0.6rem;
+    background-color: var(--accent-color)!important;
+    color: var(--primary-color) !important;
+    font-size: 1rem;
+}
+  
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+h2, h3, h4{
+    color: var(--primary-color);
+}

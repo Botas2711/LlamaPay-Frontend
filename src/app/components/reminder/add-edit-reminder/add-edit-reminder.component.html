@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="container-reminders">
+      <div class="header">
+        <h3>Recordatorio</h3>
+        <label class="subtitle">Información Básica del Recordatorio</label>
+      </div>
+      <div class="form-container">
+        <form class="form" [formGroup]="formRecordatorio">
+            <div class="form-field">
+                <label>Titulo</label>
+                <mat-form-field appearance="outline">
+                  <input type="text" matInput formControlName="title" placeholder="Ingresa el titulo" class="form-control">
+                  <mat-icon matSuffix>text_format</mat-icon>
+                  <mat-error app-field-error-messages controlName="title">El titulo es <strong>requerido</strong></mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-field">
+                <label>Detalles</label>
+                <mat-form-field appearance="outline">
+                  <input type="text" matInput formControlName="details" placeholder="Ingresa el detalle" class="form-control">
+                  <mat-icon matSuffix>text_format</mat-icon>
+                  <mat-error app-field-error-messages controlName="details">El detalle es <strong>requerido</strong></mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-field">
+                <label>Monto</label>
+                <mat-form-field appearance="outline">
+                  <input type="number" matInput formControlName="amount" placeholder="Ingresa el monto" class="form-control">
+                  <mat-icon matSuffix>money_bill</mat-icon>
+                  <mat-error app-field-error-messages controlName="amount">El monto debe ser un número valido</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-field">
+                <label>Fecha de Expiracion</label>
+                <mat-form-field appearance="outline">
+                    <input matInput [matDatepicker]="picker" formControlName="expirationDate" placeholder="dd/mm/aaaa" class="form-control" (dateChange)="convertirFechaToString($event)">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error app-field-error-messages controlName="expirationDate">La fecha de expiración es <strong>requerida</strong></mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+        <button mat-button class="primary-button" (click)="grabarRecordatorio()" [disabled]="formRecordatorio.invalid">Continuar</button>
+        <button mat-button class="secondary-button" (click)="cerrar()">Cancelar</button>
+      </div>
+    </div>
+</div>

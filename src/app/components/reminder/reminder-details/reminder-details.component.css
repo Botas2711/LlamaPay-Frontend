@@ -1,0 +1,52 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: var(--primary-color);
+    background-color: var(--warn-color);
+}
+  
+
+.recordatorio-info {
+    margin: 0 auto;
+    margin-top: 1rem;
+    text-align: center;
+}
+  
+.info-field {
+    margin: 10px 0;
+}
+  
+.action-row-centered {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+  
+.action-buttons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.separator {
+    margin: 0 8px;
+    color: #252525;
+}
+
+.option mat-icon{
+    color: var(--primary-color);
+}
+
+.secondary-button{
+    margin-top: 1rem;
+    width: 50%;
+    margin-bottom: 25px;
+    padding: 1rem 1rem;
+    border-radius: 0.6rem;
+    background-color: var(--accent-color)!important;
+    color: var(--primary-color) !important;
+    font-size: 1rem;
+}

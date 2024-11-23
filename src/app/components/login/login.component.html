@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="container-login">
+        <div class="header">
+            <span>Accede a </span>
+            <h1>LlamaPay</h1>
+        </div>
+        <div class="form-container">
+            <form class="example-form" [formGroup]="form">
+                <div class="form-field">
+                    <label>Usuario</label>
+                    <mat-form-field appearance="outline">
+                        <input type="text" matInput formControlName="username" placeholder="Ingresa tu usuario" class="form-control">
+                        <mat-icon matSuffix>person</mat-icon>
+                        <mat-error app-field-error-messages controlName="username">El usuario es <strong>requerido</strong></mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-field">
+                    <label>Contraseña</label>
+                    <mat-form-field appearance="outline">
+                        <input [type]="ocultarPass ? 'password' : 'text'" matInput formControlName="password" placeholder="Ingresa tu contraseña" class="form-control">
+                        <button mat-icon-button matSuffix (click)="PasswordVisibility()" type="button">
+                            <mat-icon>{{ ocultarPass ? 'visibility_off' : 'visibility' }}</mat-icon>
+                        </button>
+                        <mat-error app-field-error-messages controlName="password">La contraseña es <strong>requerida</strong></mat-error>
+                    </mat-form-field>
+                </div>
+            </form>
+            <button mat-button class="primary-button" (click)="login()">Iniciar Sesión</button>
+        </div>
+        <label class="forget-password">Olvidaste tu contraseña</label>
+        <a routerLink="/sign-up" class="create-account">¿No tienes una cuenta? <span>Regístrate Aquí</span></a>
+    </div>
+</div>

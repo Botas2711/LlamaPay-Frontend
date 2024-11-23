@@ -1,0 +1,80 @@
+<div class="container">
+    <h2>Tarjeta</h2>
+    <div class="content">
+        <div class="card-container">
+            <div class="card">
+                <div class="card-group">
+                    <div class="card">
+                        <div class="logo"><img src="Visa-Logo-PNG-Image.png" alt="Visa"></div>
+                        <div class="chip"><img src="chip.png" alt="chip"></div>
+                        <div class="number">{{ card.cardNumber }}</div>
+                        <div class="name">{{ card.ownerName }}</div>
+                        <div class="to">{{ card.expirationDate }}</div>
+                        <div class="ring"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="options" *ngIf="!isEditing">
+                <button mat-button class="primary-button" (click)="editando()">Editar datos</button>
+                <button mat-button class="secondary-button" (click)="eliminarTarjeta()">Eliminar</button>
+            </div>
+        </div>
+
+        <div *ngIf="isEditing" class="form-container">
+            <form class="form" [formGroup]="form">
+                <div class="form-field">
+                    <label>Numero de Tarjeta</label>
+                    <mat-form-field appearance="outline">
+                        <input type="text" matInput formControlName="cardNumber" placeholder="Ingresa el numero de tu tarjeta" class="form-control">
+                        <mat-error app-field-error-messages controlName="cardNumber">El numero es <strong>requerido</strong></mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-field">
+                    <label>Nombre del Propietario</label>
+                    <mat-form-field appearance="outline">
+                        <input type="text" matInput formControlName="ownerName" placeholder="Ingresa el nombre del propietario" class="form-control">
+                        <mat-error app-field-error-messages controlName="ownerName">El nombre del propietario es <strong>requerido</strong></mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Mes</label>
+                        <mat-form-field appearance="outline">
+                            <mat-label *ngIf="!isEditing" class="label">Selecciona el mes</mat-label>
+                            <mat-select formControlName="month" class="form-control">
+                                <mat-option *ngFor="let month of months" [value]="month.value">
+                                    {{ month.value }}
+                                </mat-option>
+                            </mat-select>
+                          <mat-error app-field-error-messages controlName="month">El mes es <strong>requerido</strong></mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-field">
+                        <label>Año</label>
+                        <mat-form-field appearance="outline">
+                            <mat-label *ngIf="!isEditing" class="label">Selecciona el año</mat-label>
+                            <mat-select formControlName="year" class="form-control">
+                                <mat-option *ngFor="let year of years" [value]="year.value">
+                                    {{ year.value }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error app-field-error-messages controlName="year">El año es <strong>requerido</strong></mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label>CVV</label>
+                    <mat-form-field appearance="outline">
+                        <input type="text" matInput formControlName="cvv" placeholder="Ingresa tu CVV" class="form-control">
+                        <mat-error app-field-error-messages controlName="cvv">El CVV es <strong>requerido</strong></mat-error>
+                    </mat-form-field>
+                </div>
+
+                <button mat-button class="primary-button" (click)="guardarTarjeta()">Guardar Cambios</button>
+                <button mat-button class="secondary-button" (click)="isEditing = false">Cancelar</button>
+            </form>
+        </div>
+    </div>
+</div>

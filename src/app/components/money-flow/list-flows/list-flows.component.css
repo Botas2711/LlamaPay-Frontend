@@ -1,0 +1,187 @@
+.container {
+    color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 0.1rem 1rem;
+    box-sizing: border-box;
+    margin: 0 auto;
+    background-color: var(--warn-color);
+}
+
+.navigate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.month-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.arrow-button {
+    flex: 0 0 auto;
+}
+
+.month-label {
+    flex: 1;
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 0.5rem 1rem;
+}
+
+.year-label {
+    text-align: center;
+    font-size: 2rem;
+    margin: 1rem 1rem;
+}
+
+table{
+    background-color: var(--accent-color);
+    margin-bottom: 2rem;
+}
+
+th, td{
+    color: var(--warn-color);
+    font-size: 1rem;
+}
+
+.title h2{
+    font-size: 2rem;
+    margin: 0;
+}
+
+.title{
+    margin-bottom: 0;
+}
+
+.primary-button {
+    width: 50%;
+    padding: 1rem 1rem;
+    border-radius: 0.6rem;
+    background-color: var(--primary-color);
+    color: var(--warn-color) !important;
+    font-size: 1rem;
+    margin: 1rem 0;
+}
+
+.icon-ingreso {
+    color: green;
+}
+  
+.icon-gasto {
+    color: red;
+}
+
+.icon-ingreso, .icon-gasto {
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+.option{
+    cursor: pointer;
+    margin-right: 3px;  
+}
+
+.option mat-icon{
+    color: var(--warn-color);
+}
+
+.chart-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.chart-column {
+    flex: 2;
+    height: 500px;
+    color: var(--primary-color);
+}
+
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.netAmount{
+    font-size: 1.5rem;
+}
+
+#char{
+    color: var(--primary-color);
+}
+
+.options-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.options{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.options h4{
+    font-size: 1.5rem;
+    margin: 0;
+}
+.form-field h4{
+    font-size: 1.2rem;
+}
+
+.first-filter{
+    display: flex;
+    gap: 15px;
+    margin-bottom: 1rem;
+}
+
+.first-filter .primary-button {
+    min-width: 220px;
+}
+
+.range-filter{
+    align-items: center;
+    margin: 0;
+    max-height: 300px;
+}
+
+.date-range{
+    display: flex;
+    gap: 25px;
+    margin: 0;
+}
+
+.year-range mat-form-field{
+    margin: 0;
+}
+
+.label{
+    color: var(--primary-color);
+}
+
+.form-control{
+    color: var(--primary-color);
+}
+
+mat-form-field{
+    color: var(--primary-color);
+}
+
+.description{
+    display: flex;
+    gap: 2rem;
+    margin: 5px 0;
+    margin-bottom: 0;
+}
+
+.total{
+    font-size: 1rem;
+}

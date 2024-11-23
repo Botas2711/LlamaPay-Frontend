@@ -1,0 +1,54 @@
+<header>
+    <div class="nav_logo">
+        <a href="" class="logo-container">
+            <img src="llama.svg" alt="LlamaPay Logo" class="logo">
+            <h2 class="logo-text">LlamaPay</h2>
+        </a>
+    </div>
+    <input type="checkbox" id="nav_check" hidden>
+    <nav>
+        <ul class="nav_links">
+            <li>
+                <a class="button" routerLink="/list-flows" routerLinkActive="active" *ngIf="usuarioLogueado()">
+                    <mat-icon matSuffix>bar_chart</mat-icon>
+                    <span class="label">Flujos de Dinero</span>
+                </a>
+            </li>
+            <li>
+                <a class="button" routerLink="/list-reminders" routerLinkActive="active" *ngIf="usuarioLogueado()">
+                    <mat-icon matSuffix>notifications</mat-icon>
+                    <span class="label">Recordatorios</span>
+                </a>
+            </li>
+            <li>
+                <a class="button" routerLink="/list-goals" routerLinkActive="active" *ngIf="usuarioLogueado()">
+                    <mat-icon matSuffix>checked</mat-icon>
+                    <span class="label">Objetivos</span>
+                </a>
+            </li>
+            <li>
+                <a class="button" routerLink="/daily-bit" routerLinkActive="active" *ngIf="usuarioLogueado()">
+                    <mat-icon matSuffix>book</mat-icon>
+                    <span class="label">Bits Diarios</span>
+                </a>
+            </li>
+            <li>
+                <a class="button" routerLink="/subscription"  routerLinkActive="active" *ngIf="usuarioLogueado()">
+                    <mat-icon matSuffix>card_giftcard</mat-icon>
+                    <span class="label">Hazte Premium</span>
+                </a>
+            </li>
+            <li>
+                <a class="button" routerLink="/profile" routerLinkActive="active" *ngIf="usuarioLogueado()">
+                    <mat-icon matSuffix>person</mat-icon>
+                    <span class="label">Perfil</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <label for="nav_check" class="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+    </label>
+</header>

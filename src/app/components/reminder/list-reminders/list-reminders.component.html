@@ -1,0 +1,8 @@
+<app-header></app-header>
+<div class="container">
+    <div class="title">
+        <h2>Lista de Recordatorios</h2>
+    </div>
+    <button mat-button class="primary-button" (click)="AbrirAddEditReminder()">Agregar Recordatorio</button>
+    <full-calendar [events]="calendarOptions.events" [options]="calendarOptions" (eventClick)="verDetalle($event)"></full-calendar>
+</div>

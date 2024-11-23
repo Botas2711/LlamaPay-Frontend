@@ -1,0 +1,37 @@
+.container {
+    color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 1rem;
+    height: 92.3vh;
+    box-sizing: border-box;
+    margin: 0 auto;
+    background-color: var(--warn-color);
+}
+
+full-calendar {
+    width: 90%;
+    max-height: 550px;
+}
+
+.title h2{
+    font-size: 2rem;
+    margin: 0;
+}
+
+.title{
+    margin-bottom: 0;
+    margin-top: 1rem;
+}
+
+.primary-button {
+    width: 50%;
+    padding: 1rem 1rem;
+    border-radius: 0.6rem;
+    background-color: var(--primary-color);
+    color: var(--warn-color) !important;
+    font-size: 1rem;
+    margin: 0.8rem 0;
+}

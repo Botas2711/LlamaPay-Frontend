@@ -1,0 +1,42 @@
+<app-header></app-header>
+<div class="container">
+    <div class="title">
+        <h2>Lista de Objetivos</h2>
+    </div>
+
+    <button mat-button class="primary-button" (click)="AbrirAddEditGoal()">Agregar Objetivo</button>
+
+    <mat-expansion-panel *ngFor="let goal of dsGoals" class="goal-panel">
+        <mat-expansion-panel-header class="header-center">
+            <mat-panel-title class="title-center">
+                {{ goal.name }}
+            </mat-panel-title>
+            <mat-panel-description class="description-center">
+                <p class="netAmount"> Saldo Neto Actual: S/.{{goal.netAmount}}</p>
+                <p class="estado">Estado: 
+                    <mat-icon class="icon" [ngStyle]="{ 'color': goal.isSuccessfull ? 'green' : 'red' }">circle</mat-icon>
+                </p>
+                
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        
+        <div class="goal-details">
+            <p>Fecha de inicio: {{ goal.startDate }}</p>
+            <p>Fecha límite: {{ goal.deadline }}</p>
+            <p>Descripción: {{ goal.description }}</p>
+            <p>Monto: S/.{{ goal.amount }}</p>
+        </div>
+
+        <mat-action-row class="action-row-centered">
+            <a class="option" (click)="borrarGoal(goal.id)">
+                <mat-icon>delete</mat-icon>
+            </a>
+            <span class="separator">|</span>    
+            <a class="option" (click)="AbrirAddEditGoal(goal.id)">
+                <mat-icon>edit</mat-icon>
+            </a>
+        </mat-action-row>
+
+    </mat-expansion-panel>
+    
+</div>

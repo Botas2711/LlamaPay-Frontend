@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="container-goals">
+      <div class="header">
+        <h3>Objetivo</h3>
+        <label class="subtitle">Información Básica del Objetivo</label>
+      </div>
+      <div class="form-container">
+        <form class="form" [formGroup]="formObjetivo">
+            <div class="form-field">
+                <label>Nombre</label>
+                <mat-form-field appearance="outline">
+                  <input type="text" matInput formControlName="name" placeholder="Ingresa el nombre" class="form-control">
+                  <mat-icon matSuffix>text_format</mat-icon>
+                  <mat-error app-field-error-messages controlName="name">El nombre es <strong>requerido</strong></mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-field">
+                <label>Descripcion</label>
+                <mat-form-field appearance="outline">
+                  <input type="text" matInput formControlName="description" placeholder="Ingresa la descripcion" class="form-control">
+                  <mat-icon matSuffix>text_format</mat-icon>
+                  <mat-error app-field-error-messages controlName="description">La description es <strong>requerida</strong></mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-field">
+                <label>Monto</label>
+                <mat-form-field appearance="outline">
+                  <input type="number" matInput formControlName="amount" placeholder="Ingresa el monto" class="form-control">
+                  <mat-icon matSuffix>money_bill</mat-icon>
+                  <mat-error app-field-error-messages controlName="amount">El monto es <strong>requerido</strong></mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-field">
+                <label>Fecha de Inicio</label>
+                <mat-form-field appearance="outline">
+                    <input matInput [matDatepicker]="startPicker" formControlName="startDate" placeholder="dd/mm/aaaa" class="form-control" (dateChange)="convertirFechaInicioToString($event)">
+                    <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #startPicker></mat-datepicker>
+                    <mat-error app-field-error-messages controlName="startDate">La fecha de inicio es <strong>requerida</strong></mat-error>
+                </mat-form-field>
+            </div>
+            
+            <div class="form-field">
+                <label>Fecha Fin</label>
+                <mat-form-field appearance="outline">
+                    <input matInput [matDatepicker]="endPicker" formControlName="deadline" placeholder="dd/mm/aaaa" class="form-control" (dateChange)="convertirFechaFinToString($event)">
+                    <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #endPicker></mat-datepicker>
+                    <mat-error *ngIf="formObjetivo.hasError('fechasInvalidas') && formObjetivo.get('deadline')?.touched">
+                      La fecha de fin debe ser mayor que la fecha de inicio.
+                    </mat-error>
+                    <mat-error *ngIf="formObjetivo.get('deadline')?.hasError('required')">
+                      La fecha fin es <strong>requerida</strong>.
+                    </mat-error>
+                    <mat-error app-field-error-messages controlName="deadline">La fecha fin es <strong>requerida</strong></mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+        <button mat-button class="primary-button" (click)="grabarObjetivo()" [disabled]="formObjetivo.invalid">Continuar</button>
+        <button mat-button class="secondary-button" (click)="cerrar()">Cancelar</button>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,108 @@
+<div class="container">
+    <div class="container-sign-up">
+      <div class="header">
+        <span>Registrate a </span>
+        <h1>LlamaPay</h1>
+        <label class="subtitle">Información Básica del Usuario</label>
+      </div>
+      <div class="form-container">
+        <form class="form" [formGroup]="form">
+          <div class="form-row">
+            <div class="form-field">
+              <label>Nombres</label>
+              <mat-form-field appearance="outline">
+                <input type="text" matInput formControlName="firstName" placeholder="Ingresa tu nombre" class="form-control">
+                <mat-icon matSuffix>text</mat-icon>
+                <mat-error app-field-error-messages controlName="firstName">El nombre es <strong>requerido</strong></mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-field">
+              <label>Apellidos</label>
+              <mat-form-field appearance="outline">
+                <input type="text" matInput formControlName="lastName" placeholder="Ingresa tu apellido" class="form-control">
+                <mat-error app-field-error-messages controlName="lastName">El apellido es <strong>requerido</strong></mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+                <label>Correo</label>
+                <mat-form-field appearance="outline">
+                  <input type="email" matInput formControlName="email" placeholder="Ingresa tu correo" class="form-control">
+                  <mat-icon matSuffix>email</mat-icon>
+                  <mat-error app-field-error-messages controlName="email">El correo debe ser válido</mat-error>
+                </mat-form-field>
+              </div>
+            <div class="form-field">
+              <label>Celular</label>
+              <mat-form-field appearance="outline">
+                <input type="text" min="9" max="9" matInput formControlName="phone" placeholder="Ingresa tu teléfono" class="form-control">
+                <mat-icon matSuffix>phone</mat-icon>
+                <mat-error app-field-error-messages controlName="phone">El teléfono debe ser un número válido</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+                <label>Fecha de Nacimiento</label>
+                <mat-form-field appearance="outline">
+                  <input matInput [matDatepicker]="picker" formControlName="birthDate" placeholder="dd/mm/aaaa" class="form-control" (dateChange)="convertirFechaToString($event)">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error *ngIf="form.get('birthDate')?.hasError('required')">
+                    La fecha de nacimiento es <strong>requerida</strong>.
+                  </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-field">
+                <label>Usuario</label>
+                <mat-form-field appearance="outline">
+                  <input type="text" matInput formControlName="username" placeholder="Ingresa tu usuario" class="form-control">
+                  <mat-icon matSuffix>person</mat-icon>
+                  <mat-error app-field-error-messages controlName="username">El usuario es <strong>requerido</strong></mat-error>
+                </mat-form-field>
+              </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label>Contraseña</label>
+              <mat-form-field appearance="outline">
+                <input [type]="ocultarPass ? 'password' : 'text'" matInput formControlName="password" placeholder="Ingresa tu contraseña" class="form-control">
+                <button mat-icon-button matSuffix (click)="PasswordVisibility()" type="button">
+                  <mat-icon>{{ ocultarPass ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+                <mat-error app-field-error-messages controlName="password">La contraseña es <strong>requerida</strong></mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-field">
+              <label>Confirmar Contraseña</label>
+              <mat-form-field appearance="outline">
+                <input [type]="ocultarPassConfirme ? 'password' : 'text'" matInput formControlName="passwordConfirme" placeholder="Vuelve a ingresar tu contraseña" class="form-control">
+                <button mat-icon-button matSuffix (click)="PasswordConfirmeVisibility()" type="button">
+                  <mat-icon>{{ ocultarPassConfirme ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+                <mat-error app-field-error-messages controlName="passwordConfirme">La contraseña es <strong>requerida</strong></mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-field">
+            <label>Género</label>
+            <mat-radio-group formControlName="gender" class="radio-button-control">
+              <mat-radio-button value="M" (click)="deseleccionarOpcion('M')">Masculino</mat-radio-button>
+              <mat-radio-button value="F" (click)="deseleccionarOpcion('F')">Femenino</mat-radio-button>
+              <mat-error class ="error-gender" *ngIf="form.get('gender')?.invalid && form.get('gender')?.touched">El género es <strong>requerido</strong></mat-error>
+            </mat-radio-group>        
+        </div>
+
+          <div class="terms-check">
+            <mat-checkbox class="example-margin" formControlName="terms">Acepto los <span>Términos y Condiciones</span> y
+              la <span>Política de Privacidad de LlamaPay</span>,
+              asegurando el uso responsable y seguro de mis datos personales.</mat-checkbox>
+              <mat-error *ngIf="form.get('terms')?.invalid && form.get('terms')?.touched">Debe aceptar los términos y condiciones para continuar</mat-error>
+          </div>
+        </form>
+        <button mat-button class="primary-button" (click)="register()" [disabled]="form.invalid">Continuar</button>
+      </div>
+    </div>
+</div>

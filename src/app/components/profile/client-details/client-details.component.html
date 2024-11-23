@@ -1,0 +1,106 @@
+<div class="container">
+    <h2>Información del Usuario</h2>
+    <div class="user-info">
+        <div class="profile-image-section">
+            <img [src]="client.profilePicture" alt="User Image" class="user-image"/>     
+        </div>
+        <div *ngIf="!isEditing" class="user-container">
+            <div class="field">
+                <label>Nombre</label>
+                <p>{{ client.firstName }}</p>
+            </div>
+            <div class="field">
+                <label>Apellidos</label>
+                <p>{{ client.lastName }}</p>
+            </div>
+            <div class="field">
+                <label>Correo</label>
+                <p>{{ client.email }}</p>
+            </div>
+            <div class="field">
+                <label>Celular</label>
+                <p>{{ client.phoneNumber }}</p>
+            </div>
+            <div class="field">
+                <label>Fecha de Nacimiento</label>
+                <p>{{ client.birthdate }}</p>
+            </div>
+            <div class="field">
+                <label>Género</label>
+                <p>{{ client.gender }}</p>
+            </div>
+        
+            <button mat-button class="primary-button" (click)="editando()">Editar información</button>
+        </div>
+
+        <div *ngIf="isEditing" class="form-container">
+            <form class="form" [formGroup]="form">
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Nombres</label>
+                        <mat-form-field appearance="outline">
+                            <input type="text" matInput formControlName="firstName" placeholder="Ingresa tu nombre" class="form-control">
+                            <mat-icon matSuffix>text</mat-icon>
+                            <mat-error app-field-error-messages controlName="firstName">El nombre es <strong>requerido</strong></mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-field">
+                        <label>Apellidos</label>
+                        <mat-form-field appearance="outline">
+                            <input type="text" matInput formControlName="lastName" placeholder="Ingresa tu apellido" class="form-control">
+                            <mat-error app-field-error-messages controlName="lastName">El apellido es <strong>requerido</strong></mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label>Correo</label>
+                    <mat-form-field appearance="outline">
+                        <input type="email" matInput formControlName="email" placeholder="Ingresa tu correo" class="form-control">
+                        <mat-icon matSuffix>email</mat-icon>
+                        <mat-error app-field-error-messages controlName="email">El correo es <strong>requerido</strong></mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-field">
+                    <label>Celular</label>
+                    <mat-form-field appearance="outline">
+                        <input type="text" matInput formControlName="phone" placeholder="Ingresa tu teléfono" class="form-control">
+                        <mat-icon matSuffix>phone</mat-icon>
+                        <mat-error app-field-error-messages controlName="phone">El teléfono es <strong>requerido</strong></mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Fecha de Nacimiento</label>
+                        <mat-form-field appearance="outline">
+                            <input matInput [matDatepicker]="picker" formControlName="birthDate" placeholder="dd/mm/aaaa" class="form-control" (dateChange)="convertirFechaToString($event)">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error app-field-error-messages controlName="birthDate">La fecha de nacimiento es <strong>requerida</strong></mat-error>  
+                        </mat-form-field>
+                    </div>
+                    <div class="form-field">
+                        <label>Género</label>
+                        <mat-radio-group formControlName="gender" class="radio-button-control">
+                            <mat-radio-button value="M" (click)="deseleccionarOpcion('M')">Masculino</mat-radio-button>
+                            <mat-radio-button value="F" (click)="deseleccionarOpcion('F')">Femenino</mat-radio-button>   
+                          </mat-radio-group>   
+                          <mat-error class ="error-gender" *ngIf="form.get('gender')?.invalid && form.get('gender')?.touched">El género es <strong>requerido</strong></mat-error>         
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label>Foto de Perfil</label>
+                    <mat-form-field appearance="outline">
+                        <input type="text" matInput formControlName="profilePicture" placeholder="Ingresa el link de to foto de perfil" class="form-control">
+                        <mat-icon matSuffix>photo</mat-icon>
+                        <mat-error app-field-error-messages controlName="profilePicture">El link es <strong>requerido</strong></mat-error>
+                    </mat-form-field>
+                </div>
+
+                <button mat-button class="primary-button" (click)="grabarCambios()">Guardar Cambios</button>
+                <button mat-button class="secondary-button" (click)="editando()">Cancelar</button>
+            </form>
+        </div>
+</div>
+
+<div class="enable-acount" (click)="Deshabilitar()" *ngIf="!isEditing">Deshabilitar cuenta</div>

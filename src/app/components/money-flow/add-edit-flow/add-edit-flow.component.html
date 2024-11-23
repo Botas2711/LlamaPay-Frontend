@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="container-flows">
+      <div class="header">
+        <h3>Flujo de Dinero</h3>
+        <label class="subtitle">Información Básica del Flujo</label>
+      </div>
+      <div class="form-container">
+        <form class="form" [formGroup]="formFlujo">
+            <div class="form-field">
+                <label>Nombre</label>
+                <mat-form-field appearance="outline">
+                  <input type="text" matInput formControlName="name" placeholder="Ingresa el nombre" class="form-control">
+                  <mat-icon matSuffix>text_format</mat-icon>
+                  <mat-error app-field-error-messages controlName="name">El nombre es <strong>requerido</strong></mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-field">
+                <label>Tipo de Flujo</label>
+                <mat-form-field appearance="outline">
+                  <mat-label *ngIf="!selectedType" class="label">Selecciona un tipo</mat-label>
+                    <mat-select formControlName="type" (selectionChange)="cargarCategorias($event)" class="form-control">
+                        <mat-option value="Ingreso">Ingreso</mat-option>
+                        <mat-option value="Gasto">Gasto</mat-option>
+                    </mat-select>
+                  <mat-error app-field-error-messages controlName="type">El tipo es <strong>requerido</strong></mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-field">
+                <label>Categoria</label>
+                <mat-form-field appearance="outline">
+                  <mat-label *ngIf="!selectedCategory && !isEditing" class="label">Selecciona una categoría</mat-label>
+                    <mat-select (selectionChange)="seleccionarCategoria($event)" formControlName="category" class="form-control">
+                      <mat-option *ngFor="let item of categories" [value]="item.id">
+                        {{item.nameCategory}}
+                      </mat-option>
+                    </mat-select>
+                  <mat-error app-field-error-messages controlName="category">La cateogira es <strong>requerida</strong></mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-field">
+                <label>Monto</label>
+                <mat-form-field appearance="outline">
+                  <input type="number" matInput formControlName="amount" placeholder="Ingresa el monto" class="form-control">
+                  <mat-icon matSuffix>money_bill</mat-icon>
+                  <mat-error app-field-error-messages controlName="amount">El monto debe ser un número válido</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-field">
+                <label>Fecha</label>
+                <mat-form-field appearance="outline">
+                    <input matInput [matDatepicker]="picker" formControlName="date" placeholder="dd/mm/aaaa" class="form-control" (dateChange)="convertirFechaToString($event)">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error app-field-error-messages controlName="date">La fecha es <strong>requerida</strong></mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+        <button mat-button class="primary-button" (click)="grabarMoneyFlow()" [disabled]="formFlujo.invalid">Continuar</button>
+        <button mat-button class="secondary-button" (click)="cerrar()">Cancelar</button>
+      </div>
+    </div>
+</div>

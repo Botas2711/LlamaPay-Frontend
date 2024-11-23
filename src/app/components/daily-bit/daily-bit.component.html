@@ -1,0 +1,16 @@
+<app-header></app-header>
+<div class="container">
+    <button mat-button class="primary-button" (click)="GenerarBitDiario()" *ngIf="generoBitDiario == false">Generar Bit Diario</button>
+
+    <mat-expansion-panel *ngIf="dailyBit != null" class="bit-panel" (opened)="Abrirpanel()">
+        <mat-expansion-panel-header class="header-center">
+            <mat-panel-title class="title-center">
+                {{ dailyBit.title }}
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="bit-details">
+            <p>{{ dailyBit.content }}</p>
+            <img [src]="dailyBit.image" alt="Bit Image" class="bit-image"/>
+        </div>
+    </mat-expansion-panel>
+</div>

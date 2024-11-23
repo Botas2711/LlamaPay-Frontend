@@ -1,0 +1,48 @@
+<app-header></app-header>
+<div class="profile-container">
+    <nav class="sidebar">
+        <ul>
+          <li [class.active]="selectedTab === 'clientDetails'">
+            <a class="button" (click)="selectTab('clientDetails')">
+                <mat-icon matSuffix>person</mat-icon>
+                <span class="label">Perfil</span>
+            </a>
+          </li>
+
+          <li [class.active]="selectedTab === 'configuration'">
+            <a class="button" (click)="selectTab('configuration')">
+                <mat-icon matSuffix>settings</mat-icon>
+                <span class="label">Configuración</span>
+            </a>
+          </li>
+
+          <li [class.active]="selectedTab === 'payment'">
+            <a class="button" (click)="selectTab('payment')">
+                <mat-icon matSuffix>credit_card</mat-icon>
+                <span class="label">Métodos de Pago</span>
+            </a>
+          </li>
+
+          <div class="spacer"></div>
+          <li>
+            <a class="button" (click)="logout()">
+                <mat-icon matSuffix>logout</mat-icon>
+                <span class="label">Salir</span>
+            </a>
+          </li>
+        </ul>
+
+    </nav>
+    
+    <div class="content">
+      <ng-container *ngIf="selectedTab === 'clientDetails'">
+        <app-client-details></app-client-details>
+      </ng-container>
+      <ng-container *ngIf="selectedTab === 'configuration'">
+        <app-configuration></app-configuration>
+      </ng-container>
+      <ng-container *ngIf="selectedTab === 'payment'">
+        <app-payment-methods></app-payment-methods>
+      </ng-container>
+    </div>
+</div>

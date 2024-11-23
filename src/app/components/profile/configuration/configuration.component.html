@@ -1,0 +1,35 @@
+<div class="container">
+    <h2>Configuración</h2>
+
+    <div class="setting-container">
+        <h4>Interfaz</h4>
+
+        <div class="form-field">
+            <label>Tema</label>
+            <mat-radio-group class="radio-button-control" [(ngModel)]="theme">
+                <mat-radio-button value="B" (click)="cambiarTema('B')">Claro</mat-radio-button>
+                <mat-radio-button value="N" (click)="cambiarTema('N')">Oscuro</mat-radio-button>   
+            </mat-radio-group>                    
+        </div>
+
+        <div class="form-field">
+            <label>Tamaño</label>
+            <div class="size-controls">
+                <a class="size-button" [class.selected]="size === 'S'" (click)="seleccionarSize('S')">Pequeño</a>
+                <a class="size-button" [class.selected]="size === 'M'" (click)="seleccionarSize('M')">Mediano</a>
+                <a class="size-button" [class.selected]="size === 'L'" (click)="seleccionarSize('L')">Grande</a>
+            </div>
+        </div>
+
+        <div class="form-field">
+            <label>Idioma</label>
+            <mat-form-field appearance="outline">
+                <mat-select [(value)]="language" (selectionChange)="seleccionarIdioma($event)" class="form-control">
+                    <mat-option *ngFor="let lang of languages" [value]="lang.value">
+                        {{ lang.viewValue }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+</div>

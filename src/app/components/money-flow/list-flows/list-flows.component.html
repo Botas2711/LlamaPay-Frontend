@@ -1,0 +1,142 @@
+<app-header></app-header>
+<div class="container">
+    <div class="navigate">
+        <span class="year-label">{{ currentYear }}</span>
+        <div class="month-navigation">
+            <button mat-icon-button (click)="retrocederMes()" class="arrow-button left">
+                <mat-icon>chevron_left</mat-icon>
+            </button>
+    
+            <span class="month-label">{{ months[currentIndex] }}</span>
+    
+            <button mat-icon-button (click)="avanzarMes()" class="arrow-button right">
+                <mat-icon>chevron_right</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="chart-container">
+        <div class="chart-column">
+            <canvas id="chart"></canvas>
+        </div>
+        <div class="options-column">
+            <div class="saldo-neto">
+                <span class="netAmount"><strong>Saldo Neto:</strong> S/. {{ moneyFlowSummary.netAmount}}</span>
+            </div>
+            <div class="description">
+                <span class="total">Ingresos: S/. {{ moneyFlowIncomesAndMonth.total}}</span>
+                <span class="total">Gastos: S/. {{ moneyFlowExpensesAndMonth.total}}</span>
+            </div>
+            <div class="options">
+                <h4>Filtros</h4>
+                <div class="first-filter">
+                    <button mat-button class="primary-button" (click)="cargarGraficoTypeCategory('Gasto')">Por Categoria y Gastos</button>
+                    <button mat-button class="primary-button" (click)="cargarGraficoTypeCategory('Ingreso')">Por Categoria e Ingresos</button>
+                </div>
+
+                <div class="range-filter">
+                    <div class="form-field">
+                        <form class="form" [formGroup]="formFiltro">
+                            <h4>Seleccionar Rango de Fechas</h4>
+                    
+                            <div class="date-range">
+                                <mat-form-field appearance="outline">
+                                    <mat-label class="label">Selecciona el mes inicial</mat-label>
+                                    <mat-select [value]="mesInicio" formControlName="startMonth" class="form-control" (selectionChange)="seleccionarMesInicio($event)">
+                                        <mat-option *ngFor="let month of monthsPicker" [value]="month.value">{{ month.viewValue }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                        
+                                <mat-form-field appearance="outline">
+                                    <mat-label class="label">Selecciona el mes final</mat-label>
+                                    <mat-select [value]="mesFin" formControlName="endMonth" class="form-control" (selectionChange)="seleccionarMesFin($event)">
+                                        <mat-option *ngFor="let month of monthsPicker" [value]="month.value">{{ month.viewValue }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            
+                            <div class="year-range">
+                                <mat-form-field appearance="outline">
+                                    <mat-label class="label">Selecciona el Año</mat-label>
+                                    <mat-select [value]="anio" formControlName="year" class="form-control" (selectionChange)="seleccionarAnio($event)">
+                                        <mat-option *ngFor="let year of years" [value]="year.value">{{ year.value }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>    
+                        </form>
+                 
+                    </div>
+                </div>
+                
+                <div class="first-filter">
+                    <button mat-button class="primary-button" (click)="cargarGraficoComparacion()">Por rango de Fechas</button>
+                    <button mat-button class="primary-button" (click)="cargarGraficoPrincipal()">Reestablecer</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="title">
+        <h2>Lista de Flujos</h2>
+    </div>
+
+    <button mat-button class="primary-button" (click)="AbrirAddEditFlow()">Agregar Flujo</button>
+    
+    <table mat-table [dataSource]="dsMoneyFlows" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <td mat-cell *matCellDef="let item"> {{item.name}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef> Tipo </th>
+            <td mat-cell *matCellDef="let item">
+              <ng-container *ngIf="item.type === 'Ingreso'; else gastoIcon">
+                <mat-icon matSuffix class="icon-ingreso">arrow_upward</mat-icon>
+                Ingreso
+              </ng-container>
+              <ng-template #gastoIcon>
+                <mat-icon matSuffix class="icon-gasto">arrow_downward</mat-icon>
+                Gasto
+              </ng-template>
+            </td>
+        </ng-container>
+    
+      
+        <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef> Monto </th>
+            <td mat-cell *matCellDef="let item"> S/.{{item.amount}} </td>
+        </ng-container>
+    
+      
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Fecha</th>
+            <td mat-cell *matCellDef="let item"> {{item.date}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="category_name">
+            <th mat-header-cell *matHeaderCellDef> Categoria </th>
+            <td mat-cell *matCellDef="let item"> {{item.category}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef> Opciones </th>
+            <td mat-cell *matCellDef="let item">
+                <a class ="option" (click)="borrarFlujo(item.id)">
+                    <mat-icon>delete</mat-icon>
+                </a>        
+                <a class ="option" (click)="AbrirAddEditFlow(item.id)">
+                    <mat-icon>edit</mat-icon>
+                </a>              
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+    </table>
+
+</div>

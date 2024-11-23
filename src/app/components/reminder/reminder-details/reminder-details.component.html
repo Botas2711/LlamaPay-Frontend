@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="recordatorio-info">
+        <div class="info-field">
+            <strong>Título: </strong> <span>{{ reminder.title }}</span>
+        </div>
+
+        <div class="info-field">
+            <strong>Detalles: </strong> <span>{{ reminder.details }}</span>
+        </div>
+
+        <div class="info-field">
+            <strong>Monto: </strong> <span>S/.{{ reminder.amount}}</span>
+        </div>
+
+        <div class="info-field">
+            <strong>Fecha de Expiración: </strong> <span>{{ reminder.expirationDate | date: 'dd/MM/yyyy' }}</span>
+        </div>
+    </div>
+
+    <mat-action-row class="action-row-centered">
+        <div class="action-buttons">
+          <a mat-button class="option" (click)="borrarReminder()">
+            <mat-icon>delete</mat-icon>
+          </a>
+          <span class="separator">|</span>
+          <a mat-button class="option" (click)="editarRecordatorio()">
+            <mat-icon>edit</mat-icon>
+          </a>
+        </div>
+    </mat-action-row>
+
+    <button mat-button class="secondary-button" (click)="cerrar()">Cancelar</button>
+</div>

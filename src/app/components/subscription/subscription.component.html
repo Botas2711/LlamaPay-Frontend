@@ -1,0 +1,85 @@
+<app-header></app-header>
+<div class="container">
+    
+    <div *ngIf="hasPremiun" class="premium-container">
+        <div class="premium-thank-you">
+            <h1>¡Gracias por convertirte en miembro Premium! Disfruta de todos tus beneficios.</h1>
+        </div>
+        <div class="image-premiun">
+            <img src="llama.svg" alt="Crecimiento financiero">
+        </div>
+    </div>
+
+    <div class="subscription-section" *ngIf="!isClick && !hasPremiun">
+        <div class="text-content">
+            <h1>¡Gestiona tus finanzas con LlamaPay! Crea objetivos ilimitados y toma el control total de tu futuro financiero</h1>
+            <button mat-button class="button" (click)="suscribirse()">Suscribirse por S/. {{premiun.price}}</button>
+        </div>
+        <div class="image-content">
+            <img src="trees-coins-growth.png" alt="Crecimiento financiero">
+        </div>
+    </div>
+
+    <div *ngIf="isClick && !hasPremiun">
+        <div class="container-card">
+          <div class="header">
+            <h3>Tarjeta</h3>
+            <label class="subtitle">Información Basica de la Tarjeta</label>
+        </div>
+        <div class="form-container">
+            <form class="form" [formGroup]="form">
+                <div class="form-field">
+                    <label>Numero de Tarjeta</label>
+                    <mat-form-field appearance="outline">
+                        <input type="number" matInput formControlName="cardNumber" placeholder="Ingresa el numero de tu tarjeta" class="form-control">
+                        <mat-error app-field-error-messages controlName="cardNumber">El numero es <strong>requerido</strong></mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-field">
+                    <label>Nombre del Propietario</label>
+                    <mat-form-field appearance="outline">
+                        <input type="text" matInput formControlName="ownerName" placeholder="Ingresa el nombre del propietario" class="form-control">
+                        <mat-error app-field-error-messages controlName="ownerName">El nombre del propietario es <strong>requerido</strong></mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Mes</label>
+                        <mat-form-field appearance="outline">
+                            <mat-label *ngIf="!selectedMonth" class="label">Selecciona el mes</mat-label>
+                            <mat-select formControlName="month" (selectionChange)="seleccionarMes($event)" class="form-control">
+                                <mat-option *ngFor="let month of months" [value]="month.value">
+                                    {{ month.value }}
+                                </mat-option>
+                            </mat-select>
+                          <mat-error app-field-error-messages controlName="month">El mes es <strong>requerido</strong></mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-field">
+                        <label>Año</label>
+                        <mat-form-field appearance="outline">
+                            <mat-label *ngIf="!selectedYear" class="label">Selecciona el año</mat-label>
+                            <mat-select (selectionChange)="seleccionarAnio($event)" formControlName="year" class="form-control">
+                                <mat-option *ngFor="let year of years" [value]="year.value">
+                                    {{ year.value }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error app-field-error-messages controlName="year">El año es <strong>requerido</strong></mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <div class="form-field">
+                    <label>CVV</label>
+                    <mat-form-field appearance="outline">
+                        <input type="text" matInput formControlName="cvv" placeholder="Ingresa tu CVV" class="form-control">
+                        <mat-error app-field-error-messages controlName="cvv">El CVV es <strong>requerido</strong></mat-error>
+                    </mat-form-field>
+                </div>
+    
+                <button mat-button class="primary-button" (click)="guardarTarjeta()">Guardar Cambios</button>
+                <button mat-button class="secondary-button" (click)="isClick = false">Cancelar</button>
+            </form>
+        </div>
+    </div>
+</div>
